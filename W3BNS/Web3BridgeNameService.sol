@@ -41,6 +41,16 @@ contract W3BNS {
         if (bytes(_name).length<=2){
             revert("Sorry, name too short.");
         }
-   
+         // checks if address is mapped to a name already
+        if (keccak256(abi.encodePacked(address_ens_map[msg.sender])) != keccak256(abi.encodePacked(""))){
+            revert("Sorry, you can only have one name per address");
+        }
+        if (registered_ens[_name]) {
+            revert("Sorry, this name is taken");
+        }
+        address_ens_map[msg.sender] = string(abi.encodePacked(_name, EXTENSION));
+        registered_ens[_name] = true;
+        return address_ens_map[msg.sender];
     }
+    
 }
