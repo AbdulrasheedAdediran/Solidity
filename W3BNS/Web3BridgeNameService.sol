@@ -14,4 +14,33 @@ contract W3BNS {
 
 // price -> 3char = 100; 4chars = 50; >=5 = 30
 
+    enum Price {
+        SHORT, // 3chars
+        MEDIUM, // 4chars
+        LONG // >=5chars
+    }
+    mapping(address => string) public address_ens_map;
+    mapping(string => bool) public registered_ens;
+    string constant EXTENSION = ".w3bridge";
+
+
+
+    // modifier checkConditions(string memory _name){
+    //     check whether address is mapped to a name already
+
+
+    //     require(bytes(_name).length>=3, "Sorry, name too short.");
+    //     require(!registered_ens[_name], "Sorry, this name is taken");
+    //     _;
+
+        
+    // }
+    
+    // creates the name service for an address
+    function create_ens(string memory _name) public  returns(string memory) {
+        if (bytes(_name).length<=2){
+            revert("Sorry, name too short.");
+        }
+   
+    }
 }
